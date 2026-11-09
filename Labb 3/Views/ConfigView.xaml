@@ -18,8 +18,8 @@
                         <TextBlock Text="My question packs" FontSize="20" FontWeight="Bold"
                                    Foreground="#2F075F" Margin="0,0,0,14" />
                         <ListBox x:Name="packList" DisplayMemberPath="Name"
-                                 MinHeight="220" BorderBrush="#E5DCEE" Padding="4">
-                        </ListBox>
+                                 MinHeight="220" BorderBrush="#E5DCEE" Padding="4"
+                                 SelectionChanged="PackList_SelectionChanged" />
                         <Button Content="+  Create new pack" Height="44" Margin="0,14,0,0"
                                 Click="CreatePackButton_Click" />
                         <Button Content="Remove selected pack" Background="#EEEAF3"
@@ -32,15 +32,15 @@
                     <StackPanel>
                         <TextBlock Text="Questions in the pack" FontSize="20" FontWeight="Bold"
                                    Foreground="#2F075F" Margin="0,0,0,14" />
-                        <ListBox MinHeight="220" BorderBrush="#E5DCEE" Padding="4">
-                            <ListBoxItem Content="1. What is the capital of Sweden?" />
-                            <ListBoxItem Content="2. Which language is used with WPF?" />
-                        </ListBox>
+                        <ListBox x:Name="questionList" DisplayMemberPath="Text"
+                                 MinHeight="220" BorderBrush="#E5DCEE" Padding="4" />
                         <WrapPanel Margin="0,14,0,0">
-                            <Button Content="Add question" Height="42" Margin="0,0,8,8" />
+                            <Button Content="Add question" Height="42" Margin="0,0,8,8"
+                                    Click="AddQuestionButton_Click" />
                             <Button Content="Edit question" Background="#EEEAF3" Foreground="#51465E"
-                                    Height="42" Margin="0,0,8,8" />
-                            <Button Content="Remove question" Background="#D9435F" Height="42" Margin="0,0,8,8" />
+                                    Height="42" Margin="0,0,8,8" Click="EditQuestionButton_Click" />
+                            <Button Content="Remove question" Background="#D9435F" Height="42" Margin="0,0,8,8"
+                                    Click="RemoveQuestionButton_Click" />
                             <Button Content="Pack settings" Background="#18A999" Height="42" Margin="0,0,8,8"
                                     Click="PackSettingsButton_Click" />
                         </WrapPanel>
