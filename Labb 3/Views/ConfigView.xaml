@@ -17,10 +17,8 @@
                     <StackPanel>
                         <TextBlock Text="My question packs" FontSize="20" FontWeight="Bold"
                                    Foreground="#2F075F" Margin="0,0,0,14" />
-                        <ListBox x:Name="packList" MinHeight="220" BorderBrush="#E5DCEE" Padding="4">
-                            <ListBoxItem Content="General knowledge" />
-                            <ListBoxItem Content="Programming" />
-                            <ListBoxItem Content="History" />
+                        <ListBox x:Name="packList" DisplayMemberPath="Name"
+                                 MinHeight="220" BorderBrush="#E5DCEE" Padding="4">
                         </ListBox>
                         <Button Content="+  Create new pack" Height="44" Margin="0,14,0,0"
                                 Click="CreatePackButton_Click" />
@@ -43,7 +41,8 @@
                             <Button Content="Edit question" Background="#EEEAF3" Foreground="#51465E"
                                     Height="42" Margin="0,0,8,8" />
                             <Button Content="Remove question" Background="#D9435F" Height="42" Margin="0,0,8,8" />
-                            <Button Content="Pack settings" Background="#18A999" Height="42" Margin="0,0,8,8" />
+                            <Button Content="Pack settings" Background="#18A999" Height="42" Margin="0,0,8,8"
+                                    Click="PackSettingsButton_Click" />
                         </WrapPanel>
                     </StackPanel>
                 </Border>

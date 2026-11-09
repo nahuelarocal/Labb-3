@@ -1,5 +1,6 @@
 using System.Windows.Controls;
 using Labb_3.Dialogs;
+using Labb_3.Models;
 
 namespace Labb_3.Views
 {
@@ -8,6 +9,10 @@ namespace Labb_3.Views
         public ConfigView()
         {
             InitializeComponent();
+
+            packList.Items.Add(new QuestionPack("General knowledge", "Medium", 20));
+            packList.Items.Add(new QuestionPack("Programming", "Easy", 25));
+            packList.Items.Add(new QuestionPack("History", "Hard", 15));
         }
 
         private void CreatePackButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -19,7 +24,8 @@ namespace Labb_3.Views
 
             if (result == true)
             {
-                packList.Items.Add(dialog.PackName);
+                QuestionPack newPack = new QuestionPack(dialog.PackName, "Medium", 20);
+                packList.Items.Add(newPack);
             }
         }
 
@@ -28,6 +34,25 @@ namespace Labb_3.Views
             if (packList.SelectedItem != null)
             {
                 packList.Items.Remove(packList.SelectedItem);
+            }
+        }
+
+        private void PackSettingsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (packList.SelectedItem != null)
+            {
+                QuestionPack selectedPack = (QuestionPack)packList.SelectedItem;
+                PackSettingsDialog dialog = new PackSettingsDialog(selectedPack);
+                dialog.Owner = System.Windows.Window.GetWindow(this);
+
+                if (dialog.ShowDialog() == true)
+                {
+                    packList.Items.Refresh();
+                }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Select a pack first.");
             }
         }
     }
