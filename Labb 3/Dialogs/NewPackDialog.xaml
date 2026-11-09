@@ -6,10 +6,10 @@
     <StackPanel Margin="24">
         <TextBlock Text="Create a new question pack" FontSize="20" FontWeight="Bold" Margin="0,0,0,16" />
         <TextBlock Text="Pack name" />
-        <TextBox Margin="0,6,0,20" Padding="7" />
+        <TextBox x:Name="packNameBox" Margin="0,6,0,20" Padding="7" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Cancel" Padding="12,7" Margin="0,0,8,0" />
-            <Button Content="Create" Padding="12,7" />
+            <Button Content="Cancel" Padding="12,7" Margin="0,0,8,0" Click="CancelButton_Click" />
+            <Button Content="Create" Padding="12,7" Click="CreateButton_Click" />
         </StackPanel>
     </StackPanel>
 </Window>
