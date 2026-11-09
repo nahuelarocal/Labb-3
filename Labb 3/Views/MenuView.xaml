@@ -9,8 +9,10 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button Content="File" Background="#5A2A91" Padding="14,7" Margin="0,0,8,0" />
-                <Button Content="Edit" Background="#5A2A91" Padding="14,7" Margin="0,0,8,0" />
-                <Button Content="Play" Background="#FFD23F" Foreground="#2F075F" Padding="18,7" />
+                <Button Content="Edit" Background="#5A2A91" Padding="14,7" Margin="0,0,8,0"
+                        Click="EditButton_Click" />
+                <Button Content="Play" Background="#FFD23F" Foreground="#2F075F" Padding="18,7"
+                        Click="PlayButton_Click" />
             </StackPanel>
         </DockPanel>
     </Border>

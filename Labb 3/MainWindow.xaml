@@ -15,6 +15,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <views:MenuView Grid.Row="0" />
-        <views:ConfigView Grid.Row="1" />
+        <Grid Grid.Row="1">
+            <views:ConfigView x:Name="configView" />
+            <views:PlayView x:Name="playView" Visibility="Collapsed" />
+        </Grid>
     </Grid>
 </Window>

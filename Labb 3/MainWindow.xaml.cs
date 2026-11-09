@@ -20,5 +20,17 @@ namespace Labb_3
         {
             InitializeComponent();
         }
+
+        public void ShowConfigView()
+        {
+            configView.Visibility = Visibility.Visible;
+            playView.Visibility = Visibility.Collapsed;
+        }
+
+        public void ShowPlayView()
+        {
+            configView.Visibility = Visibility.Collapsed;
+            playView.Visibility = Visibility.Visible;
+        }
     }
 }
