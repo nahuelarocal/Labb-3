@@ -8,7 +8,7 @@
         Title="Quiz Configurator" Height="650" Width="1000"
         MinHeight="550" MinWidth="800"
         WindowStartupLocation="CenterScreen"
-        Background="#F2F2F2">
+        Background="{StaticResource PageBackground}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

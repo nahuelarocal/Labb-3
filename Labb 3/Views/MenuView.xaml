@@ -1,14 +1,16 @@
 <UserControl x:Class="Labb_3.Views.MenuView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Border Background="White" Padding="12">
+    <Border Background="#2F075F" Padding="16">
         <DockPanel>
-            <TextBlock Text="Quiz Configurator" FontSize="18" FontWeight="Bold"
-                       VerticalAlignment="Center" Margin="8,0,24,0" />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,32,0">
+                <TextBlock Text="QUIZ" FontSize="19" FontWeight="Bold" Foreground="White" />
+                <TextBlock Text=" LAB" FontSize="19" FontWeight="Bold" Foreground="#FFD23F" />
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Content="File" Padding="14,7" Margin="0,0,8,0" />
-                <Button Content="Edit" Padding="14,7" Margin="0,0,8,0" />
-                <Button Content="Play" Padding="14,7" />
+                <Button Content="File" Background="#5A2A91" Padding="14,7" Margin="0,0,8,0" />
+                <Button Content="Edit" Background="#5A2A91" Padding="14,7" Margin="0,0,8,0" />
+                <Button Content="Play" Background="#FFD23F" Foreground="#2F075F" Padding="18,7" />
             </StackPanel>
         </DockPanel>
     </Border>
