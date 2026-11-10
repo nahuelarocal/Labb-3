@@ -6,6 +6,11 @@ namespace Labb_3.Views
 {
     public partial class ConfigView : UserControl
     {
+        public QuestionPack? SelectedPack
+        {
+            get { return packList.SelectedItem as QuestionPack; }
+        }
+
         public ConfigView()
         {
             InitializeComponent();

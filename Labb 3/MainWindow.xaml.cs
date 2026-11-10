@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Windows;
+using Labb_3.Models;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -29,6 +30,21 @@ namespace Labb_3
 
         public void ShowPlayView()
         {
+            QuestionPack? selectedPack = configView.SelectedPack;
+
+            if (selectedPack == null)
+            {
+                MessageBox.Show("Select a question pack first.");
+                return;
+            }
+
+            if (selectedPack.Questions.Count == 0)
+            {
+                MessageBox.Show("Add at least one question to this pack first.");
+                return;
+            }
+
+            playView.StartQuiz(selectedPack);
             configView.Visibility = Visibility.Collapsed;
             playView.Visibility = Visibility.Visible;
         }

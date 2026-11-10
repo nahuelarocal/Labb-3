@@ -5,9 +5,11 @@
         <Border Background="White" CornerRadius="18" Padding="32"
                 Width="760" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel>
-                <TextBlock Text="QUESTION 1 OF 2" HorizontalAlignment="Center"
+                <TextBlock x:Name="questionNumberText" Text="QUESTION 1 OF 2" HorizontalAlignment="Center"
                            FontSize="14" FontWeight="Bold" Foreground="#746B80" />
-                <TextBlock Text="What is the capital of Sweden?" TextWrapping="Wrap" TextAlignment="Center"
+                <TextBlock x:Name="scoreText" HorizontalAlignment="Right" FontSize="14"
+                           FontWeight="Bold" Foreground="#46178F" />
+                <TextBlock x:Name="questionText" Text="Question" TextWrapping="Wrap" TextAlignment="Center"
                            FontSize="28" FontWeight="Bold" Foreground="#2F075F" Margin="0,14,0,24" />
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -18,15 +20,19 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Content="Oslo" Background="#E21B3C"
-                            Height="76" FontSize="20" FontWeight="Bold" Margin="0,0,8,8" />
-                    <Button Grid.Row="0" Grid.Column="1" Content="Stockholm" Background="#1368CE"
-                            Height="76" FontSize="20" FontWeight="Bold" Margin="8,0,0,8" />
-                    <Button Grid.Row="1" Grid.Column="0" Content="Copenhagen" Background="#D89E00"
-                            Foreground="#2F075F" Height="76" FontSize="20" FontWeight="Bold" Margin="0,8,8,0" />
-                    <Button Grid.Row="1" Grid.Column="1" Content="Helsinki" Background="#26890C"
-                            Height="76" FontSize="20" FontWeight="Bold" Margin="8,8,0,0" />
+                    <Button x:Name="answer1Button" Grid.Row="0" Grid.Column="0" Background="#E21B3C"
+                            Height="76" FontSize="20" FontWeight="Bold" Margin="0,0,8,8" Click="AnswerButton_Click" />
+                    <Button x:Name="answer2Button" Grid.Row="0" Grid.Column="1" Background="#1368CE"
+                            Height="76" FontSize="20" FontWeight="Bold" Margin="8,0,0,8" Click="AnswerButton_Click" />
+                    <Button x:Name="answer3Button" Grid.Row="1" Grid.Column="0" Background="#D89E00"
+                            Foreground="#2F075F" Height="76" FontSize="20" FontWeight="Bold" Margin="0,8,8,0" Click="AnswerButton_Click" />
+                    <Button x:Name="answer4Button" Grid.Row="1" Grid.Column="1" Background="#26890C"
+                            Height="76" FontSize="20" FontWeight="Bold" Margin="8,8,0,0" Click="AnswerButton_Click" />
                 </Grid>
+                <TextBlock x:Name="feedbackText" TextAlignment="Center" FontSize="18"
+                           FontWeight="Bold" Foreground="#46178F" Margin="0,18,0,0" />
+                <Button x:Name="nextButton" Content="Next question" HorizontalAlignment="Center"
+                        Margin="0,16,0,0" Visibility="Collapsed" Click="NextButton_Click" />
             </StackPanel>
         </Border>
     </Grid>
