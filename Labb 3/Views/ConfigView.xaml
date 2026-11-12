@@ -6,6 +6,12 @@
             <TextBlock Text="Build your quiz" FontSize="30" FontWeight="Bold" Foreground="#2F075F" />
             <TextBlock Text="Create question packs and get ready to play."
                        FontSize="15" Foreground="#746B80" Margin="0,4,0,24" />
+            <WrapPanel Margin="0,0,0,20">
+                <Button Content="Save packs" Height="40" Margin="0,0,8,0"
+                        Click="SavePacksButton_Click" />
+                <Button Content="Load packs" Background="#18A999" Height="40"
+                        Click="LoadPacksButton_Click" />
+            </WrapPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="320" />

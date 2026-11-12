@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using Labb_3.Dialogs;
 using Labb_3.Models;
@@ -25,6 +29,103 @@ namespace Labb_3.Views
 
             packList.Items.Add(new QuestionPack("History", "Hard", 5));
             packList.SelectedIndex = 0;
+        }
+
+        public async Task<bool> LoadPacksAsync()
+        {
+            string filePath = GetPacksFilePath();
+
+            if (!File.Exists(filePath))
+            {
+                return false;
+            }
+
+            try
+            {
+                string json = await File.ReadAllTextAsync(filePath);
+                List<QuestionPack>? savedPacks = JsonSerializer.Deserialize<List<QuestionPack>>(json);
+
+                if (savedPacks == null)
+                {
+                    return false;
+                }
+
+                packList.Items.Clear();
+
+                foreach (QuestionPack pack in savedPacks)
+                {
+                    packList.Items.Add(pack);
+                }
+
+                if (packList.Items.Count > 0)
+                {
+                    packList.SelectedIndex = 0;
+                }
+                else
+                {
+                    questionList.Items.Clear();
+                }
+
+                return true;
+            }
+            catch (System.Exception error)
+            {
+                System.Windows.MessageBox.Show("Could not load packs: " + error.Message);
+                return false;
+            }
+        }
+
+        private async void SavePacksButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                List<QuestionPack> packs = new List<QuestionPack>();
+
+                foreach (QuestionPack pack in packList.Items)
+                {
+                    packs.Add(pack);
+                }
+
+                string folder = GetPacksFolder();
+                Directory.CreateDirectory(folder);
+
+                string json = JsonSerializer.Serialize(packs, new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                });
+
+                await File.WriteAllTextAsync(GetPacksFilePath(), json);
+                System.Windows.MessageBox.Show("Packs saved.");
+            }
+            catch (System.Exception error)
+            {
+                System.Windows.MessageBox.Show("Could not save packs: " + error.Message);
+            }
+        }
+
+        private async void LoadPacksButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            bool loaded = await LoadPacksAsync();
+
+            if (loaded)
+            {
+                System.Windows.MessageBox.Show("Packs loaded.");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("No saved packs were found.");
+            }
+        }
+
+        private string GetPacksFolder()
+        {
+            string appDataFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+            return Path.Combine(appDataFolder, "QuizConfigurator");
+        }
+
+        private string GetPacksFilePath()
+        {
+            return Path.Combine(GetPacksFolder(), "questionPacks.json");
         }
 
         private void CreatePackButton_Click(object sender, System.Windows.RoutedEventArgs e)

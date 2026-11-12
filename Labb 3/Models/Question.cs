@@ -9,6 +9,16 @@ namespace Labb_3.Models
         public string Answer4 { get; set; }
         public int CorrectAnswer { get; set; }
 
+        public Question()
+        {
+            Text = "";
+            Answer1 = "";
+            Answer2 = "";
+            Answer3 = "";
+            Answer4 = "";
+            CorrectAnswer = 1;
+        }
+
         public Question(string text, string answer1, string answer2, string answer3,
                         string answer4, int correctAnswer)
         {
