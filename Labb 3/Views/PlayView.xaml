@@ -9,6 +9,8 @@
                            FontSize="14" FontWeight="Bold" Foreground="#746B80" />
                 <TextBlock x:Name="scoreText" HorizontalAlignment="Right" FontSize="14"
                            FontWeight="Bold" Foreground="#46178F" />
+                <TextBlock x:Name="timerText" HorizontalAlignment="Center" FontSize="16"
+                           FontWeight="Bold" Foreground="#D9435F" Margin="0,8,0,0" />
                 <TextBlock x:Name="questionText" Text="Question" TextWrapping="Wrap" TextAlignment="Center"
                            FontSize="28" FontWeight="Bold" Foreground="#2F075F" Margin="0,14,0,24" />
                 <Grid>

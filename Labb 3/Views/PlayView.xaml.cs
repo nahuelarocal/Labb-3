@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using Labb_3.Models;
 
 namespace Labb_3.Views
@@ -9,11 +10,17 @@ namespace Labb_3.Views
         private QuestionPack? currentPack;
         private int currentQuestionIndex;
         private int rightAnswers;
+        private int secondsLeft;
         private bool answerSelected;
+        private DispatcherTimer questionTimer;
 
         public PlayView()
         {
             InitializeComponent();
+
+            questionTimer = new DispatcherTimer();
+            questionTimer.Interval = TimeSpan.FromSeconds(1);
+            questionTimer.Tick += QuestionTimer_Tick;
         }
 
         public void StartQuiz(QuestionPack pack)
@@ -21,6 +28,7 @@ namespace Labb_3.Views
             currentPack = pack;
             currentQuestionIndex = 0;
             rightAnswers = 0;
+            questionTimer.Stop();
             ShowQuestion();
         }
 
@@ -33,8 +41,10 @@ namespace Labb_3.Views
 
             if (currentQuestionIndex >= currentPack.Questions.Count)
             {
+                questionTimer.Stop();
                 questionNumberText.Text = "QUIZ COMPLETE";
                 scoreText.Text = "";
+                timerText.Text = "";
                 questionText.Text = "You got " + rightAnswers + " out of " + currentPack.Questions.Count + " right!";
                 feedbackText.Text = "Nice work!";
                 HideAnswerButtons();
@@ -44,8 +54,11 @@ namespace Labb_3.Views
             }
 
             Question question = currentPack.Questions[currentQuestionIndex];
+            questionTimer.Stop();
             questionNumberText.Text = "QUESTION " + (currentQuestionIndex + 1) + " OF " + currentPack.Questions.Count;
             scoreText.Text = "Score: " + rightAnswers;
+            secondsLeft = currentPack.SecondsPerQuestion;
+            timerText.Text = "Time left: " + secondsLeft + " seconds";
             questionText.Text = question.Text;
             answer1Button.Content = question.Answer1;
             answer2Button.Content = question.Answer2;
@@ -62,6 +75,7 @@ namespace Labb_3.Views
             feedbackText.Text = "";
             nextButton.Visibility = Visibility.Collapsed;
             answerSelected = false;
+            questionTimer.Start();
         }
 
         private void AnswerButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +84,8 @@ namespace Labb_3.Views
             {
                 return;
             }
+
+            questionTimer.Stop();
 
             Button clickedButton = (Button)sender;
             int answerNumber = 1;
@@ -96,24 +112,52 @@ namespace Labb_3.Views
             }
             else
             {
-                string correctAnswer = question.Answer1;
-
-                if (question.CorrectAnswer == 2)
-                {
-                    correctAnswer = question.Answer2;
-                }
-                else if (question.CorrectAnswer == 3)
-                {
-                    correctAnswer = question.Answer3;
-                }
-                else if (question.CorrectAnswer == 4)
-                {
-                    correctAnswer = question.Answer4;
-                }
-
-                feedbackText.Text = "Not quite. The answer was: " + correctAnswer;
+                feedbackText.Text = "Not quite. The answer was: " + GetCorrectAnswer(question);
             }
 
+            FinishQuestion();
+        }
+
+        private void QuestionTimer_Tick(object? sender, EventArgs e)
+        {
+            if (currentPack == null || answerSelected)
+            {
+                questionTimer.Stop();
+                return;
+            }
+
+            secondsLeft--;
+            timerText.Text = "Time left: " + secondsLeft + " seconds";
+
+            if (secondsLeft <= 0)
+            {
+                questionTimer.Stop();
+                Question question = currentPack.Questions[currentQuestionIndex];
+                feedbackText.Text = "Time's up. The answer was: " + GetCorrectAnswer(question);
+                FinishQuestion();
+            }
+        }
+
+        private string GetCorrectAnswer(Question question)
+        {
+            if (question.CorrectAnswer == 1)
+            {
+                return question.Answer1;
+            }
+            else if (question.CorrectAnswer == 2)
+            {
+                return question.Answer2;
+            }
+            else if (question.CorrectAnswer == 3)
+            {
+                return question.Answer3;
+            }
+
+            return question.Answer4;
+        }
+
+        private void FinishQuestion()
+        {
             answerSelected = true;
             answer1Button.IsEnabled = false;
             answer2Button.IsEnabled = false;
@@ -121,7 +165,7 @@ namespace Labb_3.Views
             answer4Button.IsEnabled = false;
             scoreText.Text = "Score: " + rightAnswers;
 
-            if (currentQuestionIndex == currentPack.Questions.Count - 1)
+            if (currentPack != null && currentQuestionIndex == currentPack.Questions.Count - 1)
             {
                 nextButton.Content = "See result";
             }
@@ -135,6 +179,8 @@ namespace Labb_3.Views
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            questionTimer.Stop();
+
             if (currentPack != null && currentQuestionIndex >= currentPack.Questions.Count)
             {
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

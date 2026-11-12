@@ -15,15 +15,15 @@ namespace Labb_3.Views
         {
             InitializeComponent();
 
-            QuestionPack generalPack = new QuestionPack("General knowledge", "Medium", 20);
+            QuestionPack generalPack = new QuestionPack("General knowledge", "Medium", 5);
             generalPack.Questions.Add(new Question("What is the capital of Sweden?", "Oslo", "Stockholm", "Copenhagen", "Helsinki", 2));
             packList.Items.Add(generalPack);
 
-            QuestionPack programmingPack = new QuestionPack("Programming", "Easy", 25);
+            QuestionPack programmingPack = new QuestionPack("Programming", "Easy", 5);
             programmingPack.Questions.Add(new Question("Which language is used with WPF?", "C#", "HTML", "Python", "SQL", 1));
             packList.Items.Add(programmingPack);
 
-            packList.Items.Add(new QuestionPack("History", "Hard", 15));
+            packList.Items.Add(new QuestionPack("History", "Hard", 5));
             packList.SelectedIndex = 0;
         }
 
@@ -36,7 +36,7 @@ namespace Labb_3.Views
 
             if (result == true)
             {
-                QuestionPack newPack = new QuestionPack(dialog.PackName, "Medium", 20);
+                QuestionPack newPack = new QuestionPack(dialog.PackName, "Medium", 5);
                 packList.Items.Add(newPack);
                 packList.SelectedItem = newPack;
             }
