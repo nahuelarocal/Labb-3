@@ -7,13 +7,19 @@
                 <TextBlock Text="QUIZ" FontSize="19" FontWeight="Bold" Foreground="White" />
                 <TextBlock Text=" LAB" FontSize="19" FontWeight="Bold" Foreground="#FFD23F" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="File" Background="#5A2A91" Padding="14,7" Margin="0,0,8,0" />
-                <Button Content="Edit" Background="#5A2A91" Padding="14,7" Margin="0,0,8,0"
-                        Click="EditButton_Click" />
-                <Button Content="Play" Background="#FFD23F" Foreground="#2F075F" Padding="18,7"
-                        Click="PlayButton_Click" />
-            </StackPanel>
+            <Menu Background="#2F075F" Foreground="White" VerticalAlignment="Center">
+                <MenuItem Header="_File" Foreground="White">
+                    <MenuItem Header="_Save packs" Foreground="#2F075F" InputGestureText="Ctrl+S" Click="SavePacksMenuItem_Click" />
+                    <MenuItem Header="_Load packs" Foreground="#2F075F" InputGestureText="Ctrl+O" Click="LoadPacksMenuItem_Click" />
+                </MenuItem>
+                <MenuItem Header="_Edit" Foreground="White">
+                    <MenuItem Header="_Configure" Foreground="#2F075F" Click="ConfigureMenuItem_Click" />
+                    <MenuItem Header="Pack _options" Foreground="#2F075F" Click="PackOptionsMenuItem_Click" />
+                </MenuItem>
+                <MenuItem Header="_Play" Foreground="#FFD23F">
+                    <MenuItem Header="_Start quiz" Foreground="#2F075F" Click="PlayMenuItem_Click" />
+                </MenuItem>
+            </Menu>
         </DockPanel>
     </Border>
 </UserControl>

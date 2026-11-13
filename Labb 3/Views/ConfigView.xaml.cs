@@ -77,6 +77,11 @@ namespace Labb_3.Views
 
         private async void SavePacksButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            await SavePacksAsync();
+        }
+
+        public async Task SavePacksAsync()
+        {
             try
             {
                 List<QuestionPack> packs = new List<QuestionPack>();
@@ -153,6 +158,11 @@ namespace Labb_3.Views
         }
 
         private void PackSettingsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OpenPackSettings();
+        }
+
+        public void OpenPackSettings()
         {
             if (packList.SelectedItem != null)
             {

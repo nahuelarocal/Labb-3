@@ -11,13 +11,31 @@ namespace Labb_3.Views
             InitializeComponent();
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
+        private async void SavePacksMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            await mainWindow.SavePacksAsync();
+        }
+
+        private async void LoadPacksMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            await mainWindow.LoadPacksAsync();
+        }
+
+        private void ConfigureMenuItem_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.ShowConfigView();
         }
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private void PackOptionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.ShowPackSettings();
+        }
+
+        private void PlayMenuItem_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.ShowPlayView();

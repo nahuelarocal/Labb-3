@@ -1,14 +1,7 @@
-﻿using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using Labb_3.Models;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Labb_3.Models;
 
 namespace Labb_3
 {
@@ -25,6 +18,44 @@ namespace Labb_3
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await configView.LoadPacksAsync();
+        }
+
+        private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
+            {
+                await SavePacksAsync();
+                e.Handled = true;
+            }
+            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.O)
+            {
+                await LoadPacksAsync();
+                e.Handled = true;
+            }
+        }
+
+        public async Task SavePacksAsync()
+        {
+            await configView.SavePacksAsync();
+        }
+
+        public async Task LoadPacksAsync()
+        {
+            bool loaded = await configView.LoadPacksAsync();
+
+            if (loaded)
+            {
+                MessageBox.Show("Packs loaded.");
+            }
+            else
+            {
+                MessageBox.Show("No saved packs were found.");
+            }
+        }
+
+        public void ShowPackSettings()
+        {
+            configView.OpenPackSettings();
         }
 
         public void ShowConfigView()
@@ -55,3 +86,4 @@ namespace Labb_3
         }
     }
 }
+
