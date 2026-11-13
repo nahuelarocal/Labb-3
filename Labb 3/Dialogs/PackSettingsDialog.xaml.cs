@@ -14,6 +14,7 @@ namespace Labb_3.Dialogs
             selectedPack = pack;
             packNameBox.Text = selectedPack.Name;
             difficultyBox.SelectedValue = selectedPack.Difficulty;
+            orderBox.SelectedValue = selectedPack.RandomOrder ? "Random" : "Sequential";
             secondsBox.Text = selectedPack.SecondsPerQuestion.ToString();
         }
 
@@ -25,6 +26,7 @@ namespace Labb_3.Dialogs
             {
                 selectedPack.Name = packNameBox.Text;
                 selectedPack.Difficulty = difficultyBox.Text;
+                selectedPack.RandomOrder = orderBox.SelectedValue.ToString() == "Random";
                 selectedPack.SecondsPerQuestion = seconds;
                 DialogResult = true;
             }

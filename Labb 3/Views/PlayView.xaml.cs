@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -8,6 +9,7 @@ namespace Labb_3.Views
     public partial class PlayView : UserControl
     {
         private QuestionPack? currentPack;
+        private List<Question> quizQuestions;
         private int currentQuestionIndex;
         private int rightAnswers;
         private int secondsLeft;
@@ -18,6 +20,8 @@ namespace Labb_3.Views
         {
             InitializeComponent();
 
+            quizQuestions = new List<Question>();
+
             questionTimer = new DispatcherTimer();
             questionTimer.Interval = TimeSpan.FromSeconds(1);
             questionTimer.Tick += QuestionTimer_Tick;
@@ -26,6 +30,21 @@ namespace Labb_3.Views
         public void StartQuiz(QuestionPack pack)
         {
             currentPack = pack;
+            quizQuestions = new List<Question>(pack.Questions);
+
+            if (pack.RandomOrder)
+            {
+                Random random = new Random();
+
+                for (int i = quizQuestions.Count - 1; i > 0; i--)
+                {
+                    int otherIndex = random.Next(i + 1);
+                    Question savedQuestion = quizQuestions[i];
+                    quizQuestions[i] = quizQuestions[otherIndex];
+                    quizQuestions[otherIndex] = savedQuestion;
+                }
+            }
+
             currentQuestionIndex = 0;
             rightAnswers = 0;
             questionTimer.Stop();
@@ -39,13 +58,13 @@ namespace Labb_3.Views
                 return;
             }
 
-            if (currentQuestionIndex >= currentPack.Questions.Count)
+            if (currentQuestionIndex >= quizQuestions.Count)
             {
                 questionTimer.Stop();
                 questionNumberText.Text = "QUIZ COMPLETE";
                 scoreText.Text = "";
                 timerText.Text = "";
-                questionText.Text = "You got " + rightAnswers + " out of " + currentPack.Questions.Count + " right!";
+                questionText.Text = "You got " + rightAnswers + " out of " + quizQuestions.Count + " right!";
                 feedbackText.Text = "Nice work!";
                 HideAnswerButtons();
                 nextButton.Content = "Back to edit";
@@ -53,9 +72,9 @@ namespace Labb_3.Views
                 return;
             }
 
-            Question question = currentPack.Questions[currentQuestionIndex];
+            Question question = quizQuestions[currentQuestionIndex];
             questionTimer.Stop();
-            questionNumberText.Text = "QUESTION " + (currentQuestionIndex + 1) + " OF " + currentPack.Questions.Count;
+            questionNumberText.Text = "QUESTION " + (currentQuestionIndex + 1) + " OF " + quizQuestions.Count;
             scoreText.Text = "Score: " + rightAnswers;
             secondsLeft = currentPack.SecondsPerQuestion;
             timerText.Text = "Time left: " + secondsLeft + " seconds";
@@ -103,7 +122,7 @@ namespace Labb_3.Views
                 answerNumber = 4;
             }
 
-            Question question = currentPack.Questions[currentQuestionIndex];
+            Question question = quizQuestions[currentQuestionIndex];
 
             if (answerNumber == question.CorrectAnswer)
             {
@@ -132,7 +151,7 @@ namespace Labb_3.Views
             if (secondsLeft <= 0)
             {
                 questionTimer.Stop();
-                Question question = currentPack.Questions[currentQuestionIndex];
+                Question question = quizQuestions[currentQuestionIndex];
                 feedbackText.Text = "Time's up. The answer was: " + GetCorrectAnswer(question);
                 FinishQuestion();
             }
@@ -165,7 +184,7 @@ namespace Labb_3.Views
             answer4Button.IsEnabled = false;
             scoreText.Text = "Score: " + rightAnswers;
 
-            if (currentPack != null && currentQuestionIndex == currentPack.Questions.Count - 1)
+            if (currentPack != null && currentQuestionIndex == quizQuestions.Count - 1)
             {
                 nextButton.Content = "See result";
             }
@@ -181,7 +200,7 @@ namespace Labb_3.Views
         {
             questionTimer.Stop();
 
-            if (currentPack != null && currentQuestionIndex >= currentPack.Questions.Count)
+            if (currentPack != null && currentQuestionIndex >= quizQuestions.Count)
             {
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 mainWindow.ShowConfigView();
