@@ -23,6 +23,12 @@ namespace Labb_3.Views
             await mainWindow.LoadPacksAsync();
         }
 
+        private void ImportQuestionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.ImportQuestions();
+        }
+
         private void ConfigureMenuItem_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

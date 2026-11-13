@@ -11,6 +11,8 @@
                 <MenuItem Header="_File" Foreground="White">
                     <MenuItem Header="_Save packs" Foreground="#2F075F" InputGestureText="Ctrl+S" Click="SavePacksMenuItem_Click" />
                     <MenuItem Header="_Load packs" Foreground="#2F075F" InputGestureText="Ctrl+O" Click="LoadPacksMenuItem_Click" />
+                    <Separator />
+                    <MenuItem Header="_Import questions" Foreground="#2F075F" Click="ImportQuestionsMenuItem_Click" />
                 </MenuItem>
                 <MenuItem Header="_Edit" Foreground="White">
                     <MenuItem Header="_Configure" Foreground="#2F075F" Click="ConfigureMenuItem_Click" />

@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Labb_3.Models;
+using Labb_3.Dialogs;
 
 namespace Labb_3
 {
@@ -56,6 +57,31 @@ namespace Labb_3
         public void ShowPackSettings()
         {
             configView.OpenPackSettings();
+        }
+
+        public void ImportQuestions()
+        {
+            QuestionPack? selectedPack = configView.SelectedPack;
+
+            if (selectedPack == null)
+            {
+                MessageBox.Show("Select a question pack first.");
+                return;
+            }
+
+            ImportQuestionsDialog dialog = new ImportQuestionsDialog();
+            dialog.Owner = this;
+
+            if (dialog.ShowDialog() == true)
+            {
+                foreach (Question question in dialog.ImportedQuestions)
+                {
+                    selectedPack.Questions.Add(question);
+                }
+
+                configView.RefreshQuestions();
+                MessageBox.Show(dialog.ImportedQuestions.Count + " questions imported.");
+            }
         }
 
         public void ShowConfigView()

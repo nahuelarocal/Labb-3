@@ -201,6 +201,11 @@ namespace Labb_3.Views
             }
         }
 
+        public void RefreshQuestions()
+        {
+            ShowQuestions();
+        }
+
         private void AddQuestionButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (packList.SelectedItem != null)
