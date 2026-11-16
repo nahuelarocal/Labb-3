@@ -29,6 +29,9 @@
                 </MenuItem>
                 <MenuItem Header="_Play" Foreground="#FFD23F">
                     <MenuItem Header="_Start quiz" Foreground="#2F075F" Click="PlayMenuItem_Click" />
+                    <Separator />
+                    <MenuItem Header="Toggle _fullscreen" Foreground="#2F075F" InputGestureText="F11"
+                              Click="FullScreenMenuItem_Click" />
                 </MenuItem>
             </Menu>
         </DockPanel>

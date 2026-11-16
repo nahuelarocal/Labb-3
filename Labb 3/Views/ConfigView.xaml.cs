@@ -10,6 +10,8 @@ namespace Labb_3.Views
 {
     public partial class ConfigView : UserControl
     {
+        private bool fullScreenLayout;
+
         public QuestionPack? SelectedPack
         {
             get { return packList.SelectedItem as QuestionPack; }
@@ -29,6 +31,47 @@ namespace Labb_3.Views
 
             packList.Items.Add(new QuestionPack("History", "Hard", 5));
             packList.SelectedIndex = 0;
+        }
+
+        public void SetFullScreenLayout(bool fullScreen)
+        {
+            fullScreenLayout = fullScreen;
+            UpdateFullScreenLayout();
+        }
+
+        private void ConfigView_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            UpdateFullScreenLayout();
+        }
+
+        private void UpdateFullScreenLayout()
+        {
+            if (fullScreenLayout)
+            {
+                double contentWidth = ActualWidth - 72;
+
+                if (contentWidth > 0)
+                {
+                    mainStack.Width = System.Math.Min(contentWidth, 1700);
+                }
+
+                mainStack.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                cardGrid.MaxWidth = double.PositiveInfinity;
+                cardGrid.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+
+                double listHeight = ActualHeight * 0.6;
+                packList.MinHeight = listHeight;
+                questionList.MinHeight = listHeight;
+            }
+            else
+            {
+                mainStack.Width = double.NaN;
+                mainStack.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                cardGrid.MaxWidth = double.PositiveInfinity;
+                cardGrid.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                packList.MinHeight = 220;
+                questionList.MinHeight = 220;
+            }
         }
 
         public async Task<bool> LoadPacksAsync()

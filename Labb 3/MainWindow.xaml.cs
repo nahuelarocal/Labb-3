@@ -9,6 +9,8 @@ namespace Labb_3
 
     public partial class MainWindow : Window
     {
+        private bool isFullScreen;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,6 +48,11 @@ namespace Labb_3
                 RemoveQuestion();
                 e.Handled = true;
             }
+            else if (Keyboard.Modifiers == ModifierKeys.None && e.Key == Key.F11)
+            {
+                ToggleFullScreen();
+                e.Handled = true;
+            }
         }
 
         public async Task SavePacksAsync()
@@ -70,6 +77,26 @@ namespace Labb_3
         public void ShowPackSettings()
         {
             configView.OpenPackSettings();
+        }
+
+        public void ToggleFullScreen()
+        {
+            if (isFullScreen)
+            {
+                WindowStyle = WindowStyle.SingleBorderWindow;
+                ResizeMode = ResizeMode.CanResize;
+                WindowState = WindowState.Normal;
+                isFullScreen = false;
+            }
+            else
+            {
+                WindowStyle = WindowStyle.None;
+                ResizeMode = ResizeMode.NoResize;
+                WindowState = WindowState.Maximized;
+                isFullScreen = true;
+            }
+
+            configView.SetFullScreenLayout(isFullScreen);
         }
 
         public void AddQuestion()
@@ -114,6 +141,7 @@ namespace Labb_3
 
         public void ShowConfigView()
         {
+            configView.SetFullScreenLayout(isFullScreen);
             configView.Visibility = Visibility.Visible;
             playView.Visibility = Visibility.Collapsed;
         }

@@ -64,5 +64,11 @@ namespace Labb_3.Views
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.ShowPlayView();
         }
+
+        private void FullScreenMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.ToggleFullScreen();
+        }
     }
 }
