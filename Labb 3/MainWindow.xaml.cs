@@ -31,6 +31,21 @@ namespace Labb_3
                 await LoadPacksAsync();
                 e.Handled = true;
             }
+            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.N)
+            {
+                AddQuestion();
+                e.Handled = true;
+            }
+            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.E)
+            {
+                EditQuestion();
+                e.Handled = true;
+            }
+            else if (Keyboard.Modifiers == ModifierKeys.None && e.Key == Key.Delete)
+            {
+                RemoveQuestion();
+                e.Handled = true;
+            }
         }
 
         public async Task SavePacksAsync()
@@ -55,6 +70,21 @@ namespace Labb_3
         public void ShowPackSettings()
         {
             configView.OpenPackSettings();
+        }
+
+        public void AddQuestion()
+        {
+            configView.AddQuestion();
+        }
+
+        public void EditQuestion()
+        {
+            configView.EditQuestion();
+        }
+
+        public void RemoveQuestion()
+        {
+            configView.RemoveQuestion();
         }
 
         public void ImportQuestions()

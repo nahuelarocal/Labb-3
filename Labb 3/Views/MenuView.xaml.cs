@@ -41,6 +41,24 @@ namespace Labb_3.Views
             mainWindow.ShowPackSettings();
         }
 
+        private void AddQuestionMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.AddQuestion();
+        }
+
+        private void EditQuestionMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.EditQuestion();
+        }
+
+        private void RemoveQuestionMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.RemoveQuestion();
+        }
+
         private void PlayMenuItem_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

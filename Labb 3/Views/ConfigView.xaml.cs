@@ -208,6 +208,11 @@ namespace Labb_3.Views
 
         private void AddQuestionButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            AddQuestion();
+        }
+
+        public void AddQuestion()
+        {
             if (packList.SelectedItem != null)
             {
                 QuestionPack selectedPack = (QuestionPack)packList.SelectedItem;
@@ -228,6 +233,11 @@ namespace Labb_3.Views
 
         private void EditQuestionButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            EditQuestion();
+        }
+
+        public void EditQuestion()
+        {
             if (questionList.SelectedItem != null)
             {
                 Question selectedQuestion = (Question)questionList.SelectedItem;
@@ -247,6 +257,11 @@ namespace Labb_3.Views
         }
 
         private void RemoveQuestionButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            RemoveQuestion();
+        }
+
+        public void RemoveQuestion()
         {
             if (packList.SelectedItem != null && questionList.SelectedItem != null)
             {

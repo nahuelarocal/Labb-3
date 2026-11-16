@@ -16,7 +16,16 @@
                 </MenuItem>
                 <MenuItem Header="_Edit" Foreground="White">
                     <MenuItem Header="_Configure" Foreground="#2F075F" Click="ConfigureMenuItem_Click" />
-                    <MenuItem Header="Pack _options" Foreground="#2F075F" Click="PackOptionsMenuItem_Click" />
+                    <Separator />
+                    <MenuItem Header="_Add question" Foreground="#2F075F" InputGestureText="Ctrl+N"
+                              Click="AddQuestionMenuItem_Click" />
+                    <MenuItem Header="_Edit question" Foreground="#2F075F" InputGestureText="Ctrl+E"
+                              Click="EditQuestionMenuItem_Click" />
+                    <MenuItem Header="_Remove question" Foreground="#2F075F" InputGestureText="Delete"
+                              Click="RemoveQuestionMenuItem_Click" />
+                    <Separator />
+                    <MenuItem Header="Pack _options" Foreground="#2F075F" InputGestureText="Alt+E, O"
+                              Click="PackOptionsMenuItem_Click" />
                 </MenuItem>
                 <MenuItem Header="_Play" Foreground="#FFD23F">
                     <MenuItem Header="_Start quiz" Foreground="#2F075F" Click="PlayMenuItem_Click" />
